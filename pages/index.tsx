@@ -1,10 +1,21 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useCallback, useState } from "react";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
+  const router = useRouter();
   const [shopName, setShopName] = useState("");
+
+  const transitionToShopPage = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      router.push(`/${shopName}`);
+    },
+    [router, shopName]
+  );
 
   return (
     <div className={styles.container}>
@@ -15,7 +26,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <form onSubmit={() => console.log("送信")}>
+        <form onSubmit={transitionToShopPage}>
           <label>
             shop name:
             <input
