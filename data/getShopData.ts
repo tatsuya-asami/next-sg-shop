@@ -2,7 +2,7 @@ import type { Shop } from "./shops";
 
 export async function loadShops(): Promise<Shop[]> {
   try {
-    const res = await fetch(`http://localhost:3000/api/shop`);
+    const res = await fetch(`${process.env.ORIGIN}/api/shop`);
     const data = await res.json();
     return data;
   } catch (error) {
