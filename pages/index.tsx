@@ -21,7 +21,9 @@ const Home: NextPage = () => {
           onChange={(event) => router.push(`shops/${event.target.value}`)}
           defaultValue=""
         >
-          <option value="">Select shop</option>
+          <option value="" disabled>
+            Select shop
+          </option>
           {SHOPS.map(({ name }) => (
             <option key={name} value={name}>
               {name}
