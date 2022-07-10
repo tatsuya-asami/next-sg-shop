@@ -1,12 +1,19 @@
+import Link from "next/link";
 import { getShopData, loadShops } from "../../data/getShopData";
 import { Shop } from "../../data/shops";
+import styles from "../../styles/Home.module.css";
 
 const Shop = ({ shopParams }: { shopParams: Shop }) => {
   return (
-    <div>
-      <h1>{shopParams.name}</h1>
-      <p>星: {shopParams.rank}</p>
-      <p>持ち込み: {shopParams.bringIn ? "可" : "不可"}</p>
+    <div className={styles.container}>
+      <main className={styles.main}>
+        <h1>{shopParams.name}</h1>
+        <p>星: {shopParams.rank}</p>
+        <p>持ち込み: {shopParams.bringIn ? "可" : "不可"}</p>
+        <Link href="/">
+          <a>戻る</a>
+        </Link>
+      </main>
     </div>
   );
 };
