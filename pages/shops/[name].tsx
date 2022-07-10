@@ -1,5 +1,5 @@
-import { getShopData } from "../../data/getShopData";
-import { Shop, SHOPS } from "../../data/shops";
+import { getShopData, loadShops } from "../../data/getShopData";
+import { Shop } from "../../data/shops";
 
 const Shop = ({ shopParams }: { shopParams: Shop }) => {
   return (
@@ -14,7 +14,8 @@ const Shop = ({ shopParams }: { shopParams: Shop }) => {
 export default Shop;
 
 export async function getStaticPaths() {
-  const paths = SHOPS.map(({ name }) => ({ params: { name } }));
+  const shopList = await loadShops();
+  const paths = shopList.map(({ name }) => ({ params: { name } }));
   return {
     paths,
     fallback: false,
