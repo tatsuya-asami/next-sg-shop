@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   const transitionToShopPage = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      router.push(`/${shopName}`);
+      router.push(`shops/${shopName}`);
     },
     [router, shopName]
   );
