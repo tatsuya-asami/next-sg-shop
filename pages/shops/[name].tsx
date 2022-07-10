@@ -1,4 +1,3 @@
-import type { NextPage } from "next";
 import { getShopData } from "../../data/getShopData";
 import { SHOPS } from "../../data/shops";
 
