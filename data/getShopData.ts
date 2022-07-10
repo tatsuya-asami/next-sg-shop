@@ -1,6 +1,6 @@
-import { SHOPS } from "./shops";
+import type { Shop } from "./shops";
 
-export async function loadShops(): Promise<typeof SHOPS> {
+export async function loadShops(): Promise<Shop[]> {
   try {
     const res = await fetch(`http://localhost:3000/api/shop`);
     const data = await res.json();
@@ -13,8 +13,8 @@ export async function loadShops(): Promise<typeof SHOPS> {
   }
 }
 
-export const getShopData = async (name: string) => {
+export const getShopData = async (name: string): Promise<Shop> => {
   const shops = await loadShops();
   const shopName = shops.find((shop) => shop.name === name);
-  return shopName ?? "不明なお店";
+  return shopName ?? { name: "不明なお店", rank: 1, bringIn: false };
 };
