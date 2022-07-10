@@ -1,4 +1,4 @@
-import { getShopData } from "../../data/getShopData";
+import { getShopData, loadShops } from "../../data/getShopData";
 import { SHOPS } from "../../data/shops";
 
 const Shop = ({ shopParams }: { shopParams: { name: string } }) => {
@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: { params: { name: string } }) {
-  const shopParams = getShopData(params.name);
+  const shopParams = await getShopData(params.name);
   return {
     props: {
       shopParams,
