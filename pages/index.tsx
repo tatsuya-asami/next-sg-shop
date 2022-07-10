@@ -1,21 +1,20 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
+import { SHOPS } from "../data/shops";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   const router = useRouter();
-  const [shopName, setShopName] = useState("");
 
-  const transitionToShopPage = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      router.push(`shops/${shopName}`);
-    },
-    [router, shopName]
-  );
+  const transitionToShopPage: React.ChangeEventHandler<HTMLSelectElement> =
+    useCallback(
+      (event) => {
+        router.push(`shops/${event.target.value}`);
+      },
+      [router]
+    );
 
   return (
     <div className={styles.container}>
@@ -26,16 +25,15 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <form onSubmit={transitionToShopPage}>
-          <label>
-            shop name:
-            <input
-              type="text"
-              value={shopName}
-              onChange={(event) => setShopName(event.target.value)}
-            />
-          </label>
-        </form>
+        shop name:
+        <select onChange={transitionToShopPage} defaultValue="">
+          <option value="">Select shop</option>
+          {SHOPS.map(({ name }) => (
+            <option key={name} value={name}>
+              {name}
+            </option>
+          ))}
+        </select>
       </main>
     </div>
   );
