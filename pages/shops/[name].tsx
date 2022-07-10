@@ -1,9 +1,14 @@
+import { GetStaticPaths, GetStaticProps } from "next";
 import Link from "next/link";
-import { getShopData, loadShops } from "../../data/getShopData";
+import { getShopData } from "../../data/getShopData";
 import { Shop, SHOPS } from "../../data/shops";
 import styles from "../../styles/Home.module.css";
 
-const Shop = ({ shopParams }: { shopParams: Shop }) => {
+type Props = {
+  shopParams: Shop;
+};
+
+const Shop: React.FC<Props> = ({ shopParams }) => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -20,19 +25,23 @@ const Shop = ({ shopParams }: { shopParams: Shop }) => {
 
 export default Shop;
 
-export async function getStaticPaths() {
+type Params = Pick<Shop, "name">;
+
+export const getStaticPaths: GetStaticPaths<Params> = () => {
   const paths = SHOPS.map(({ name }) => ({ params: { name } }));
   return {
     paths,
     fallback: false,
   };
-}
+};
 
-export async function getStaticProps({ params }: { params: { name: string } }) {
-  const shopParams = await getShopData(params.name);
+export const getStaticProps: GetStaticProps<Props, Params> = async ({
+  params,
+}) => {
+  const shopParams = await getShopData(params?.name ?? "");
   return {
     props: {
       shopParams,
     },
   };
-}
+};
