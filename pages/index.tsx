@@ -8,14 +8,6 @@ import styles from "../styles/Home.module.css";
 const Home: NextPage = () => {
   const router = useRouter();
 
-  const transitionToShopPage: React.ChangeEventHandler<HTMLSelectElement> =
-    useCallback(
-      (event) => {
-        router.push(`shops/${event.target.value}`);
-      },
-      [router]
-    );
-
   return (
     <div className={styles.container}>
       <Head>
@@ -26,7 +18,10 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         shop name:
-        <select onChange={transitionToShopPage} defaultValue="">
+        <select
+          onChange={(event) => router.push(`shops/${event.target.value}`)}
+          defaultValue=""
+        >
           <option value="">Select shop</option>
           {SHOPS.map(({ name }) => (
             <option key={name} value={name}>
