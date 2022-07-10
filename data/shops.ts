@@ -1,6 +1,6 @@
 export const SHOPS = [
-  { name: "Salt" },
-  { name: "Pork" },
-  { name: "Soy" },
-  { name: "Miso" },
+  { name: "俺の塩" },
+  { name: "君の豚" },
+  { name: "Your soy" },
+  { name: "MyMiso" },
 ];
